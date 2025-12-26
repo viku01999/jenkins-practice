@@ -31,19 +31,23 @@ which java
 
 ## 3. Jenkins
 
+- **Installation Command**
+
+```bash
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins
+```
+
 - **Download Jenkins WAR** (WAR file and setup)
 
 ```bash
 sudo mkdir -p /usr/share/java
 sudo wget https://get.jenkins.io/war-stable/2.528.3/jenkins.war -O /usr/share/java/jenkins.war
-sudo chown jenkins:jenkins /usr/share/java/jenkins.war
-sudo chmod 755 /usr/share/java/jenkins.war
-```
-
-- Create Jenkins user
-
-```bash
-sudo adduser jenkins
 ```
 
 - Run Jenkins manually
@@ -58,13 +62,24 @@ sudo -u jenkins /opt/jdk-21.0.8/bin/java -Djava.awt.headless=true -jar /usr/shar
 sudo -u jenkins nohup /opt/jdk-21.0.8/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --httpPort=8998 > /var/log/jenkins.log 2>&1 &
 ```
 
+```bash
+# Generally this is not required (Optional)
+sudo chown jenkins:jenkins /usr/share/java/jenkins.war
+sudo chmod 755 /usr/share/java/jenkins.war
+```
+
+- Create Jenkins user
+
+```bash
+sudo adduser jenkins
+```
+
 - Access Jenkins
   - Open browser: ``` http://localhost:8998 ```
 
 ```bash
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+sudo cat /var/lib/jenkins/.jenkins/secrets/initialAdminPassword
 ```
-
 
 ## Delete and Clean Up Jenkins on Ubuntu 25 (Keep Java)
 
@@ -125,3 +140,21 @@ ls -l /var/lib/
 ls -l /var/log/
 systemctl status jenkins
 ```
+
+## Flow chart
+
+```mermaid
+flowchart TD
+    A[Start: Ubuntu 25 System] --> B[Install Oracle JDK 21]
+    B --> C[Set JAVA_HOME=/opt/jdk-21.0.8 and add to PATH]
+    C --> D[Download Jenkins WAR file]
+    D --> E[Create Jenkins user: sudo adduser jenkins]
+    E --> F[Set permissions for WAR]
+    F --> G[Run Jenkins manually using WAR]
+    G --> H{Optional: Keep Jenkins running after logout?}
+    H -->|Yes| I[Run with nohup or screen: sudo -u jenkins nohup java -jar jenkins.war &]
+    H -->|No| J[Jenkins runs in foreground terminal]
+    I --> K[Access Jenkins at http://localhost:8998]
+    J --> K
+    K --> L[Retrieve initial admin password: /var/lib/jenkins/secrets/initialAdminPassword]
+    L --> M[Complete setup in browser]
