@@ -1,29 +1,36 @@
 {
-  "name": "jenkins-practice",
+  "name": "github-workflows",
   "version": "1.0.0",
-  "description": "",
+  "description": "**Purpose:** Automate tasks such as testing, building, and deploying your Node.js + TypeScript project whenever you push code to GitHub.",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
-    "test": "echo \"No tests yet\""
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/viku01999/jenkins-practice.git"
+    "url": "git+https://github.com/viku01999/github-workflows.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "vikas",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/viku01999/jenkins-practice/issues"
+    "url": "https://github.com/viku01999/github-workflows/issues"
   },
-  "homepage": "https://github.com/viku01999/jenkins-practice#readme",
+  "homepage": "https://github.com/viku01999/github-workflows#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.0.3",
+    "jest": "^30.2.0",
     "nodemon": "^3.1.11",
+    "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
