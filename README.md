@@ -79,6 +79,8 @@ sudo adduser jenkins
 
 ```bash
 sudo cat /var/lib/jenkins/.jenkins/secrets/initialAdminPassword
+# or
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 
 ## Delete and Clean Up Jenkins on Ubuntu 25 (Keep Java)
@@ -156,5 +158,8 @@ flowchart TD
     H -->|No| J[Jenkins runs in foreground terminal]
     I --> K[Access Jenkins at http://localhost:8998]
     J --> K
-    K --> L[Retrieve initial admin password: /var/lib/jenkins/secrets/initialAdminPassword]
+    K --> L[Retrieve initial admin password: 
+    sudo cat /var/lib/jenkins/secrets/initialAdminPassword 
+    or 
+    sudo cat /var/lib/jenkins/.jenkins/secrets/initialAdminPassword]
     L --> M[Complete setup in browser]
