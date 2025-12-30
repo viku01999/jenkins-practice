@@ -138,77 +138,80 @@ pipeline {
 }
 ```
 
-## 4. Running the Jenkins Build
+## 🚀 4. Running the Jenkins Build
 
-1. Open your Jenkins project from the Jenkins dashboard.
+Follow these steps to execute and monitor your Jenkins pipeline:
 
-2. On the project page, you will see several available options, including:
+1. 🏠 Open your Jenkins project from the **Jenkins Dashboard**.
 
-   - **Build Now**  
-     Manually triggers a new build of the pipeline immediately.
+2. On the project page, you will find several options:
 
-   - **Configure**  
-     Opens the project configuration page where you can edit the pipeline script, environment variables, triggers, and other settings.
+   - **▶️ Build Now**  
+     Manually triggers a new pipeline build immediately.
 
-   - **Pipeline Overview**  
-     Displays a visual representation of the pipeline stages and their execution status.
+   - **⚙️ Configure**  
+     Opens the configuration page to edit pipeline scripts, environment variables, triggers, and other settings.
 
-   - **Build History**  
-     Shows a list of all previous builds with their build numbers, timestamps, and status (success, failure, or running).
+   - **📊 Pipeline Overview**  
+     Shows a visual representation of all pipeline stages and their execution status.
 
-   - **Status**  
+   - **🕘 Build History**  
+     Lists previous builds with numbers, timestamps, and statuses (success, failure, running).
+
+   - **📈 Status**  
      Displays the current state of the last build.
 
-   - **Changes**  
-     Shows source code changes since the last successful build (available when SCM is configured).
+   - **📝 Changes**  
+     Shows source code changes since the last successful build (requires SCM integration).
 
-   - **Workspace**  
-     Displays the files and directories used by Jenkins during the build.
+   - **📂 Workspace**  
+     Accesses files and directories used by Jenkins during the build.
 
-3. Click **Build Now** to start a new pipeline execution.
+3. Click **▶️ Build Now** to start a new build.
 
-4. A new build entry will appear in the **Build History** section.
+4. A new entry will appear in **🕘 Build History**.
 
-5. Click the build number to open the build details page, where you can access:
+5. Click the build number to open detailed view, where you can access:
 
-   - **Console Output**  
-     View detailed logs and command execution output for debugging.
+   - **📄 Console Output** – View detailed logs and execution output for debugging.
+   - **📊 Pipeline Overview** – Track stage progress and results.
+   - **📝 Changes** – Review committed code included in the build.
+   - **⏱️ Timing** – See the duration of each stage.
 
-   - **Pipeline Overview**  
-     Track the progress and result of each pipeline stage.
+6. To monitor logs in real-time, click **📄 Console Output**.
 
-   - **Changes**  
-     Review the list of code changes included in that build.
-
-   - **Timing**  
-     See how long each stage took to execute.
-
-6. To monitor logs in real time, click **Console Output**.
-
-7. To stop a running build, click the **❌ (Terminate)** button for that build.
+7. To stop a running build, click **❌ Terminate**.
 
 ---
 
-## 5. Build Status & Monitoring
+## 📊 5. Build Status & Monitoring
 
-Jenkins uses color indicators to show build status:
+Jenkins provides visual indicators for build status:
 
-- ✅ **Green build**  
-  The pipeline completed successfully.
-
-- ❌ **Red build**  
-  The pipeline failed. Check the **Console Output** for errors.
-
-- ⏳ **Blue / Running build**  
-  The pipeline is currently in progress.
+- ✅ **Green build** – Pipeline completed successfully.
+- ❌ **Red build** – Pipeline failed. Check **Console Output** for errors.
+- ⏳ **Blue / Running build** – Pipeline is currently executing.
 
 ---
 
-## Notes & Best Practices
+## 🧠 Notes & Best Practices
 
-- Avoid hardcoding absolute paths; prefer Jenkins environment variables.
-- Use the following best practices:
-  - **Git SCM integration** for source control and automated builds
-  - **Jenkins workspace** (`$WORKSPACE`) instead of manual directory paths
-  - **Artifact archiving** for storing build outputs in production pipelines
-- Use **.nvmrc** or Node.js version locking to maintain consistent Node.js versions across environments.
+- 🚫 Avoid hardcoding absolute paths; use **Jenkins environment variables** instead.
+- ✅ Best practices for pipelines:
+  - **🔗 Git SCM Integration** – Automated builds from source control.
+  - **📂 Jenkins Workspace (`$WORKSPACE`)** – Use for all file paths.
+  - **📦 Artifact Archiving** – Store build outputs for production pipelines.
+- 🔒 Maintain consistent Node.js versions using **.nvmrc** or Node version managers.
+- 📌 Consider adding automated triggers for **CI/CD workflows**.
+
+---
+
+### 🎯 Summary
+
+By following these steps, you can:
+
+- ✅ Start, monitor, and debug Jenkins builds  
+- ✅ Understand pipeline stage results  
+- ✅ Implement industry-standard best practices for CI/CD  
+
+---
