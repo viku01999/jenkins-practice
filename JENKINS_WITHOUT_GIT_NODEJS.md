@@ -1,76 +1,80 @@
-# Jenkins + Local + Node.js + TypeScript  
+# 🚀 Jenkins + Local + Node.js + TypeScript  
 
-**Complete Step-by-Step Setup Guide (Beginner to Industry-Ready)**
+### 🏗️ Complete Step-by-Step Setup Guide (Beginner → Industry-Ready)
 
-This guide explains how to configure **Jenkins locally** to build, test, and manage a **Node.js + TypeScript** application using a Jenkins Pipeline.
+This document explains how to configure **Jenkins locally** to **build, test, and manage** a **Node.js + TypeScript** application using a **Jenkins Declarative Pipeline**.
 
 ---
 
-## Prerequisites
+## 📌 What You’ll Learn
 
-Before starting, ensure you have the following:
+- ✅ Install & configure **Node.js** in Jenkins  
+- ✅ Create a **Jenkins Pipeline project**
+- ✅ Run **npm install, build, and tests**
+- ✅ Monitor builds & understand pipeline status
+- ✅ Follow **best practices** used in real-world CI/CD
 
-- Jenkins installed and running on your local machine
-- A Node.js + TypeScript project containing:
+---
+
+## 🧰 Prerequisites
+
+Before you begin, make sure you have:
+
+- 🟢 **Jenkins** installed and running locally  
+- 🟢 A **Node.js + TypeScript project** containing:
   - `package.json`
-  - A build script (`npm run build`)
-  - A test script (`npm test`)
-- A Jenkins user account with permission to:
-  - Manage plugins
-  - Configure tools
-  - Create pipeline projects
+  - `npm run build`
+  - `npm test`
+- 🟢 A Jenkins user with permission to:
+  - 🔧 Manage plugins  
+  - ⚙️ Configure tools  
+  - 🧪 Create pipeline jobs  
 
 ---
 
-## 1. Node.js Environment Setup in Jenkins
+## 1️⃣ Node.js Environment Setup in Jenkins
 
-Follow these steps to install and configure Node.js in Jenkins:
+Follow these steps to install Node.js support in Jenkins:
 
-1. Open the **Jenkins Dashboard**
-2. Click the **gear icon** → **Manage Jenkins**
-3. Select **Plugins**
-4. Navigate to **Available Plugins**
+1. 🏠 Open **Jenkins Dashboard**
+2. ⚙️ Click **Manage Jenkins**
+3. 🔌 Select **Plugins**
+4. 🔍 Go to **Available Plugins**
 5. Search for **NodeJS**
-   - If it is already installed, verify it under **Installed Plugins**
-6. Install the **NodeJS Plugin**
-7. Go back to **Manage Jenkins**
-8. Click **Tools**
-9. Scroll down to **NodeJS Installations**
-10. Click **Add NodeJS**
-11. Configure the Node.js installation:
-    - **Name**: `node-lts`  
-      > This name will be referenced in the Jenkins pipeline to select the Node.js environment
-    - Enable **Install automatically**
-    - Select the required **Node.js version** (LTS is recommended)
-12. Leave all other options as default
-13. Click **Save**
-14. Return to the **Jenkins Home Page**
+6. 📥 Install **NodeJS Plugin**
+7. 🔄 Return to **Manage Jenkins**
+8. 🛠️ Click **Tools**
+9. ⬇️ Scroll to **NodeJS Installations**
+10. ➕ Click **Add NodeJS**
+11. Configure:
+    - **Name**: `node-lts`
+    - ✅ Enable **Install automatically**
+    - 📦 Choose **Node.js LTS version**
+12. 💾 Click **Save**
+
+📌 **Note:**  
+The name `node-lts` will be referenced in the Jenkins pipeline.
 
 ---
 
-## 2. Jenkins Pipeline Project Setup
+## 2️⃣ Create a Jenkins Pipeline Project
 
-Create a new Jenkins Pipeline project:
-
-1. From the Jenkins Dashboard, click **New Item**
-2. Enter a project name of your choice
-3. Select **Pipeline**
-4. Click **OK**
-5. You will be redirected to the project configuration page
-6. (Optional) Add a project description
-7. Scroll down to the **Pipeline** section
-8. Set **Definition** to:
-   - `Pipeline script`
-9. Paste the pipeline script provided below
-10. Click **Save**
-
-After saving, Jenkins will redirect you to the newly created project page.
+1. ➕ Click **New Item**
+2. ✏️ Enter a project name (example: `node-typescript-pipeline`)
+3. 📌 Select **Pipeline**
+4. ✅ Click **OK**
+5. 📝 (Optional) Add a description
+6. ⬇️ Scroll to **Pipeline**
+7. Set **Definition** → `Pipeline script`
+8. 📋 Paste the pipeline code (see below)
+9. 💾 Click **Save**
 
 ---
 
-## 3. Jenkins Pipeline Script
+## 3️⃣ Jenkins Pipeline Script
 
-> ⚠️ **Important:** Update the project directory path to match your local system or replace it with `$WORKSPACE`.
+> ⚠️ **Important:**  
+> Replace the project path with `$WORKSPACE` for best practice.
 
 ```groovy
 pipeline {
@@ -86,59 +90,49 @@ pipeline {
 
     stages {
 
-        stage('Install Dependencies') {
+        stage('📦 Install Dependencies') {
             steps {
                 echo 'Installing npm dependencies'
-                dir('/home/vikas/Documents/jenkins-practice') {
+                dir("$WORKSPACE") {
                     sh 'npm install'
                 }
             }
         }
 
-        stage('Build TypeScript') {
+        stage('🏗️ Build TypeScript') {
             steps {
-                echo 'Compiling TypeScript'
-                dir('/home/vikas/Documents/jenkins-practice') {
+                echo 'Building application'
+                dir("$WORKSPACE") {
                     sh 'npm run build'
                 }
             }
         }
 
-        stage('Run Tests') {
+        stage('🧪 Run Tests') {
             steps {
                 echo 'Running tests'
-                dir('/home/vikas/Documents/jenkins-practice') {
+                dir("$WORKSPACE") {
                     sh 'npm test'
                 }
             }
         }
 
-        stage('Post-Build') {
+        stage('✅ Post Build') {
             steps {
                 echo 'Build completed successfully'
             }
         }
-
-        // Optional: Start the application
-        // stage('Start Application') {
-        //     steps {
-        //         echo 'Starting application'
-        //         dir('/home/vikas/Documents/jenkins-practice') {
-        //             sh 'npm run dev'
-        //         }
-        //     }
-        // }
     }
 
     post {
         success {
-            echo 'Pipeline finished successfully'
+            echo '🎉 Pipeline finished successfully'
         }
         failure {
-            echo 'Pipeline failed. Check the console output for details.'
+            echo '❌ Pipeline failed – check console output'
         }
         always {
-            echo 'Build finished. Artifacts (dist/) can be archived if required.'
+            echo '📁 Build finished – artifacts can be archived'
         }
     }
 }
