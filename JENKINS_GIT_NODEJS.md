@@ -205,7 +205,7 @@ pipeline {
 
 ## 7️⃣ Trigger Jenkins Pipeline Automatically
 
-## Option A: Poll SCM (Simple)
+## Option A: Poll SCM (Simple) or build manually
 
 1. In **Pipeline → Build Triggers**, check **Poll SCM**  
 2. Add schedule, e.g.: `H/5 * * * *`
@@ -260,3 +260,15 @@ By following this guide, you can:
 - ✅ Automatically trigger builds on GitHub pushes  
 - ✅ Monitor and debug pipeline stages efficiently  
 - ✅ Apply industry-standard CI/CD best practices
+
+## 🔹 Check Poll SCM logs in Jenkins
+
+1. **Open your Jenkins job**  
+    - In left side git polling log (Click)
+
+2. **Click on “git polling log”**  
+   - In the left-hand menu of the job page, you should see **“git polling log”**.  
+   - If you don’t see it, make sure **Poll SCM** is enabled in **Build Triggers**.
+
+3. **Read the log**  
+   Each poll will show something like:

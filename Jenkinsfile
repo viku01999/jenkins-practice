@@ -42,7 +42,7 @@ pipeline {
             steps {
                 echo 'Deploying application...'
                 dir("$WORKSPACE") {
-                    sh 'npm run dev'
+                    sh 'npm start'
                 }
             }
         }
