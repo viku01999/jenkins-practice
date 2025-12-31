@@ -38,6 +38,15 @@ pipeline {
             }
         }
 
+        stage('🚀 Deploy') {
+            steps {
+                echo 'Deploying application...'
+                dir("$WORKSPACE") {
+                    sh 'npm run dev'
+                }
+            }
+        }
+
         stage('✅ Post Build') {
             steps {
                 echo 'Build completed successfully'
