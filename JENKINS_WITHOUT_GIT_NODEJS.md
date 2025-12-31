@@ -1,6 +1,6 @@
 # 🚀 Jenkins + Local + Node.js + TypeScript  
 
-### 🏗️ Complete Step-by-Step Setup Guide (Beginner → Industry-Ready)
+## 🏗️ Complete Step-by-Step Setup Guide (Beginner → Industry-Ready)
 
 This document explains how to configure **Jenkins locally** to **build, test, and manage** a **Node.js + TypeScript** application using a **Jenkins Declarative Pipeline**.
 
