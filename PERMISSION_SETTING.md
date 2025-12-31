@@ -2,8 +2,7 @@
 
 > **Disclaimer:** This setup is intended **only for testing purposes**.  
 > The group `rnd` has full read, write, and execute permissions.  
-> After testing, **delete the group** to avoid permission conflicts in future work with Jenkins and GitHub.
-
+> After testing, **delete the group** to avoid permission conflicts in future work with Jenkins and  GitHub.
 **Note:** Directory paths may differ based on your system setup. Adjust them accordingly.
 
 This documentation provides step-by-step instructions to set up a shared folder, configure user permissions, and run local code on Ubuntu via Jenkins.
