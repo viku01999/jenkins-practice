@@ -9,7 +9,7 @@ This guide explains how to **push your local Node.js + TypeScript project to Git
 ## 🔄 Project Structure
 
 - ✅ This is folder structure for the project
-![Project Structure](/media/local_project.png)
+![Project Structure](/media/github.png)
 
 ---
 
@@ -169,6 +169,15 @@ pipeline {
                 echo 'Running tests'
                 dir("$WORKSPACE") {
                     sh 'npm test'
+                }
+            }
+        }
+
+        stage('🚀 Deploy') {
+            steps {
+                echo 'Deploying application...'
+                dir("$WORKSPACE") {
+                    sh 'npm run deploy'
                 }
             }
         }
