@@ -4,6 +4,11 @@
 
 This document explains how to configure **Jenkins locally** to **build, test, and manage** a **Node.js + TypeScript** application using a **Jenkins Declarative Pipeline**.
 
+## 🔄 Project structure
+
+- ✅ This is folder structure for this
+![Project Structure](/media/local_project.png)
+
 ---
 
 ## 📌 What You’ll Learn
