@@ -272,3 +272,40 @@ By following this guide, you can:
 
 3. **Read the log**  
    Each poll will show something like:
+
+## 📝 Note: How Jenkins Runs Builds with Poll SCM
+
+## 🔹 Poll detects changes
+
+- If **Poll SCM** finds new commits in Git, Jenkins will **trigger a new build**.
+- If there are **no new commits**, Jenkins will **not trigger a build**.
+
+## 🔹 What happens in a triggered build
+
+Your pipeline runs **all stages** defined in `Jenkinsfile`:
+
+- `npm install` → installs dependencies  
+- `npm run build` → compiles TypeScript  
+- `npm test` → runs tests  
+- `npm start` → starts your Node.js server  
+
+> Even if code changes are small, **all stages execute again**, including `npm start`.
+
+---
+
+### 🔹 Important point about `npm start` (Deploy stage)
+
+- `npm start` runs your **Node.js server**.  
+- **Problem:** If your previous build already started a server on the same port (e.g., 3000), the new build will **fail at this step** because the port is already in use.  
+- Jenkins does **not automatically kill previous servers**; each build runs in the same workspace unless you isolate them with **Docker, containers, or different ports**.
+
+```groovy
+stage('🚀 Deploy') {
+    steps {
+        echo 'Deploying application...'
+        dir("$WORKSPACE") {
+            sh 'npm start'
+        }
+    }
+}
+```

@@ -1,3 +1,38 @@
+# 🔹 Blue-Green Deployment Locally with Node.js + Jenkins
+
+This guide shows how to simulate **Blue-Green Deployment** locally using your existing Jenkins + Node.js + TypeScript project. The goal is to have **two environments (Blue & Green)** running on different ports, allowing safe deployment and testing.
+
+---
+
+## 🔹 Prerequisites
+
+- Node.js + TypeScript project with:
+  - `package.json`
+  - `npm run build`
+  - `npm test`
+  - `npm start` (server script)
+- Jenkins installed and configured
+- Git repository with your project
+- Ports available for testing (e.g., `3000` for Blue, `3001` for Green)
+
+---
+
+## 1️⃣ Update your `package.json` scripts
+
+Add environment-specific scripts for Blue and Green:
+
+```json
+"scripts": {
+  "dev": "nodemon src/index.ts",
+  "build": "tsc",
+  "start": "node dist/index.js",
+  "start:blue": "PORT=3000 node dist/index.js",
+  "start:green": "PORT=3001 node dist/index.js",
+  "test": "jest"
+}
+```
+
+```groovy
 pipeline {
     agent any
 
@@ -5,15 +40,10 @@ pipeline {
         nodejs 'node-lts'
     }
 
-    // environment {
-    //     NODE_ENV = 'development'
-    // }
-
     stages {
 
         stage('📦 Install Dependencies') {
             steps {
-                echo 'Installing npm dependencies'
                 dir("$WORKSPACE") {
                     sh 'npm install'
                 }
@@ -22,7 +52,6 @@ pipeline {
 
         stage('🏗️ Build TypeScript') {
             steps {
-                echo 'Building application'
                 dir("$WORKSPACE") {
                     sh 'npm run build'
                 }
@@ -31,23 +60,11 @@ pipeline {
 
         stage('🧪 Run Tests') {
             steps {
-                echo 'Running tests'
                 dir("$WORKSPACE") {
                     sh 'npm test'
                 }
             }
         }
-
-        // stage('🚀 Deploy') {
-        //     steps {
-        //         echo 'Deploying application...'
-        //         dir("$WORKSPACE") {
-        //             sh 'npm start'
-        //         }
-        //     }
-        // }
-
-// For blue green deployment
 
         stage('🚀 Deploy Blue') {
             when {
@@ -73,20 +90,15 @@ pipeline {
 
         stage('✅ Post Build') {
             steps {
-                echo 'Build completed successfully'
+                echo 'Build and deploy completed'
             }
         }
     }
 
     post {
-        success {
-            echo '🎉 Pipeline finished successfully'
-        }
-        failure {
-            echo '❌ Pipeline failed – check console output'
-        }
         always {
-            echo '📁 Build finished – artifacts can be archived'
+            echo '📁 Build finished'
         }
     }
 }
+```
