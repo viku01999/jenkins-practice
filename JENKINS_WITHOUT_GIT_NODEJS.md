@@ -89,9 +89,9 @@ pipeline {
         nodejs 'node-lts'
     }
 
-    environment {
-        NODE_ENV = 'development'
-    }
+    // environment {
+    //     NODE_ENV = 'development'
+    // }
 
     stages {
 

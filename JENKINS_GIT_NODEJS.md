@@ -113,9 +113,9 @@ git push -u origin main
 ## 5️⃣ Create a Jenkins Pipeline Project
 
 1. ➕ Click **New Item**  
-2. ✏️ Enter project name (example: `node-typescript-pipeline`)  
+2. ✏️ Enter project name (example: `node-github`)  
 3. 📌 Select **Pipeline**  
-4. ✅ Click **OK**  
+4. ✅ Click **OK**
 5. 📝 Add optional description  
 6. ⬇️ Scroll to **Pipeline**  
 7. Set **Definition → Pipeline script from SCM**  
@@ -140,9 +140,9 @@ pipeline {
         nodejs 'node-lts'
     }
 
-    environment {
-        NODE_ENV = 'development'
-    }
+    // environment {
+    //     NODE_ENV = 'development'
+    // }
 
     stages {
 
