@@ -55,7 +55,7 @@ pipeline {
             }
             steps {
                 dir("$WORKSPACE") {
-                    sh 'npm run start:blue &'
+                    sh 'npm run start:blue'
                 }
             }
         }
@@ -66,7 +66,7 @@ pipeline {
             }
             steps {
                 dir("$WORKSPACE") {
-                    sh 'npm run start:green &'
+                    sh 'npm run start:green'
                 }
             }
         }
